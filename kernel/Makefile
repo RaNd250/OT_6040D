@@ -372,7 +372,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-                   -mtune=cortex-a7 \
+                   -mtune=cortex-a9 \
                    -march=armv7-a \
                    -mfpu=neon-vfpv4 -mfloat-abi=softfp
 KBUILD_AFLAGS_KERNEL :=
