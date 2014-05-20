@@ -212,6 +212,7 @@ config IP6_NF_SECURITY
        tristate "Security table"
        depends on SECURITY
        depends on NETFILTER_ADVANCED
+	default y
        help
          This option adds a `security' table to iptables, for use
          with Mandatory Access Control (MAC) policy.

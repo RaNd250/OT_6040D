@@ -25,7 +25,7 @@ config NTFS_FS
 
 	  If you are not using Windows NT, 2000, XP or 2003 in addition to
 	  Linux on your computer it is safe to say N.
-
+		defualt y
 config NTFS_DEBUG
 	bool "NTFS debugging support"
 	depends on NTFS_FS
@@ -48,6 +48,7 @@ config NTFS_DEBUG
 	  When reporting bugs, please try to have available a full dump of
 	  debugging messages while the misbehaviour was occurring.
 
+		default n
 config NTFS_RW
 	bool "NTFS write support"
 	depends on NTFS_FS
@@ -76,3 +77,4 @@ config NTFS_RW
 	  <http://topologi-linux.sourceforge.net/>
 
 	  It is perfectly safe to say N here.
+	default n
