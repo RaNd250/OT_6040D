@@ -145,6 +145,7 @@ config DEBUG_SECTION_MISMATCH
 
 config DEBUG_KERNEL
 	bool "Kernel debugging"
+	default n
 	help
 	  Say Y here if you are developing drivers or trying to debug and
 	  identify kernel problems.
@@ -152,6 +153,7 @@ config DEBUG_KERNEL
 config DEBUG_SHIRQ
 	bool "Debug shared IRQ handlers"
 	depends on DEBUG_KERNEL && GENERIC_HARDIRQS
+	default n
 	help
 	  Enable this to generate a spurious interrupt as soon as a shared
 	  interrupt handler is registered, and just before one is deregistered.
@@ -285,7 +287,7 @@ config BOOTPARAM_HUNG_TASK_PANIC_VALUE
 config SCHED_DEBUG
 	bool "Collect scheduler debugging info"
 	depends on DEBUG_KERNEL && PROC_FS
-	default y
+	default n
 	help
 	  If you say Y here, the /proc/sched_debug file will be provided
 	  that can help debug the scheduler. The runtime overhead of this
@@ -319,6 +321,7 @@ config TIMER_STATS
 
 config DEBUG_OBJECTS
 	bool "Debug object operations"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  If you say Y here, additional code will be inserted into the
@@ -327,12 +330,14 @@ config DEBUG_OBJECTS
 
 config DEBUG_OBJECTS_SELFTEST
 	bool "Debug objects selftest"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  This enables the selftest of the object debug code.
 
 config DEBUG_OBJECTS_FREE
 	bool "Debug objects in freed memory"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  This enables checks whether a k/v free operation frees an area
@@ -342,6 +347,7 @@ config DEBUG_OBJECTS_FREE
 
 config DEBUG_OBJECTS_TIMERS
 	bool "Debug timer objects"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  If you say Y here, additional code will be inserted into the
@@ -350,6 +356,7 @@ config DEBUG_OBJECTS_TIMERS
 
 config DEBUG_OBJECTS_WORK
 	bool "Debug work objects"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  If you say Y here, additional code will be inserted into the
@@ -358,12 +365,14 @@ config DEBUG_OBJECTS_WORK
 
 config DEBUG_OBJECTS_RCU_HEAD
 	bool "Debug RCU callbacks objects"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  Enable this to turn on debugging of RCU list heads (call_rcu() usage).
 
 config DEBUG_OBJECTS_PERCPU_COUNTER
 	bool "Debug percpu counter objects"
+	default n
 	depends on DEBUG_OBJECTS
 	help
 	  If you say Y here, additional code will be inserted into the
@@ -373,13 +382,14 @@ config DEBUG_OBJECTS_PERCPU_COUNTER
 config DEBUG_OBJECTS_ENABLE_DEFAULT
 	int "debug_objects bootup default value (0-1)"
         range 0 1
-        default "1"
+        default "0"
         depends on DEBUG_OBJECTS
         help
           Debug objects boot parameter default value
 
 config DEBUG_SLAB
 	bool "Debug slab memory allocations"
+	default n
 	depends on DEBUG_KERNEL && SLAB && !KMEMCHECK
 	help
 	  Say Y here to have the kernel do limited verification on memory
@@ -389,7 +399,7 @@ config DEBUG_SLAB
 config DEBUG_SLAB_LEAK
 	bool "Memory leak debugging"
 	depends on DEBUG_SLAB
-
+	default n
 config SLUB_DEBUG_ON
 	bool "SLUB debugging on by default"
 	depends on SLUB && SLUB_DEBUG && !KMEMCHECK
@@ -471,7 +481,7 @@ config DEBUG_KMEMLEAK_DEFAULT_OFF
 config DEBUG_PREEMPT
 	bool "Debug preemptible kernel"
 	depends on DEBUG_KERNEL && PREEMPT && TRACE_IRQFLAGS_SUPPORT
-	default y
+	default n
 	help
 	  If you say Y here then the kernel will use a debug variant of the
 	  commonly used smp_processor_id() function and will print warnings
@@ -480,6 +490,7 @@ config DEBUG_PREEMPT
 
 config DEBUG_RT_MUTEXES
 	bool "RT Mutex debugging, deadlock detection"
+	default n
 	depends on DEBUG_KERNEL && RT_MUTEXES
 	help
 	 This allows rt mutex semantics violations and rt mutex related
@@ -487,7 +498,7 @@ config DEBUG_RT_MUTEXES
 
 config DEBUG_PI_LIST
 	bool
-	default y
+	default n
 	depends on DEBUG_RT_MUTEXES
 
 config RT_MUTEX_TESTER
@@ -656,6 +667,7 @@ config TRACE_IRQFLAGS
 
 config DEBUG_ATOMIC_SLEEP
 	bool "Sleep inside atomic section checking"
+	default n
 	select PREEMPT_COUNT
 	depends on DEBUG_KERNEL
 	help
@@ -666,6 +678,7 @@ config DEBUG_ATOMIC_SLEEP
 
 config DEBUG_LOCKING_API_SELFTESTS
 	bool "Locking API boot-time self-tests"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  Say Y here if you want the kernel to run a short self-test during
@@ -682,6 +695,7 @@ config STACKTRACE
 
 config DEBUG_STACK_USAGE
 	bool "Stack utilization instrumentation"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  Enables the display of the minimum amount of free stack which each
@@ -691,6 +705,7 @@ config DEBUG_STACK_USAGE
 
 config DEBUG_KOBJECT
 	bool "kobject debugging"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  If you say Y here, some extra kobject debugging messages will be sent
@@ -698,6 +713,7 @@ config DEBUG_KOBJECT
 
 config DEBUG_HIGHMEM
 	bool "Highmem debugging"
+	default n
 	depends on DEBUG_KERNEL && HIGHMEM
 	help
 	  This options enables addition error checking for high memory systems.
@@ -708,7 +724,7 @@ config DEBUG_BUGVERBOSE
 	depends on BUG
 	depends on ARM || AVR32 || M32R || M68K || SPARC32 || SPARC64 || \
 		   FRV || SUPERH || GENERIC_BUG || BLACKFIN || MN10300 || TILE
-	default y
+	default n
 	help
 	  Say Y here to make BUG() panics output the file name and line number
 	  of the BUG call as well as the EIP and oops trace.  This aids
@@ -717,6 +733,7 @@ config DEBUG_BUGVERBOSE
 config DEBUG_INFO
 	bool "Compile the kernel with debug info"
 	depends on DEBUG_KERNEL
+	default n
 	help
           If you say Y here the resulting kernel image will include
 	  debugging info resulting in a larger kernel image.
@@ -742,6 +759,7 @@ config DEBUG_INFO_REDUCED
 
 config DEBUG_VM
 	bool "Debug VM"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  Enable this to turn on extended checks in the virtual-memory system
@@ -761,6 +779,7 @@ config DEBUG_VIRTUAL
 config DEBUG_NOMMU_REGIONS
 	bool "Debug the global anon/private NOMMU mapping region tree"
 	depends on DEBUG_KERNEL && !MMU
+	default n
 	help
 	  This option causes the global tree of anonymous and private mapping
 	  regions to be regularly checked for invalid topology.
@@ -768,6 +787,7 @@ config DEBUG_NOMMU_REGIONS
 config DEBUG_WRITECOUNT
 	bool "Debug filesystem writers count"
 	depends on DEBUG_KERNEL
+	default n
 	help
 	  Enable this to catch wrong use of the writers count in struct
 	  vfsmount.  This will increase the size of each file struct by
@@ -827,6 +847,7 @@ config DEBUG_NOTIFIERS
 
 config DEBUG_CREDENTIALS
 	bool "Debug credential management"
+	default n
 	depends on DEBUG_KERNEL
 	help
 	  Enable this to turn on some debug checking for credential
@@ -1030,6 +1051,7 @@ config DEBUG_PER_CPU_MAPS
 	bool "Debug access to per_cpu maps"
 	depends on DEBUG_KERNEL
 	depends on SMP
+	default n
 	help
 	  Say Y to verify that the per_cpu map being accessed has
 	  been set up. This adds a fair amount of code to kernel memory

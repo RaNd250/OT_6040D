@@ -115,25 +115,14 @@ config LOCALVERSION_AUTO
 
 	  which is done within the script "scripts/setlocalversion".)
 
-config HAVE_KERNEL_GZIP
-	bool
-
-config HAVE_KERNEL_BZIP2
-	bool
-
 config HAVE_KERNEL_LZMA
-	bool
+        bool
 
-config HAVE_KERNEL_XZ
-	bool
-
-config HAVE_KERNEL_LZO
-	bool
 
 choice
 	prompt "Kernel compression mode"
-	default KERNEL_GZIP
-	depends on HAVE_KERNEL_GZIP || HAVE_KERNEL_BZIP2 || HAVE_KERNEL_LZMA || HAVE_KERNEL_XZ || HAVE_KERNEL_LZO
+	depends on HAVE_KERNEL_LZMA
+	default y
 	help
 	  The linux kernel is a kind of self-extracting executable.
 	  Several compression algorithms are available, which differ
@@ -560,7 +549,7 @@ config IKCONFIG_PROC
 config LOG_BUF_SHIFT
 	int "Kernel log buffer size (16 => 64KB, 17 => 128KB)"
 	range 12 21
-	default 17
+	default 16
 	help
 	  Select kernel log buffer size as a power of 2.
 	  Examples:
@@ -1236,7 +1225,7 @@ config PCI_QUIRKS
           unaffected by PCI quirks.
 
 config SLUB_DEBUG
-	default y
+	default n
 	bool "Enable SLUB debugging support" if EXPERT
 	depends on SLUB && SYSFS
 	help
